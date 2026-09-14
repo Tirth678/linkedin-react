@@ -10,9 +10,9 @@ function ProfileCard (props: Props) {
     return (
         <>
         <div className="border-2 p-5 rounded-2xl">
-            <img src={props.img1} height={192} width={192}/>
-            <img className="rounded-4xl " src={props.img2} height={65} width={65}/>
-            <h1 className="font-bold text-2xl">{props.name}</h1>
+            <img className="relative" src={props.img1} height={192} width={192}/>
+            <img className="rounded-4xl absolute z-10 -translate-y-10" src={props.img2} height={75} width={75}/>
+            <h1 className="font-bold text-2xl mt-10">{props.name}</h1>
             <p>{props.desc}</p>
             <p className="text-sm">{props.state}</p>
             <div className="flex flex-row">
