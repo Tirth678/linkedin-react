@@ -1,11 +1,12 @@
-import Feed from "./Feed";
+import NewPost from "./NewPost";
+import Feed from "./NewPost";
 import Post from "./Post";
 
 function CenterScreen (){
     return (
         <>
         <div>
-            <Feed/>
+            <NewPost/>
             <Post name={"Raman Singh"} profilePic={"https://i.pinimg.com/736x/70/a2/41/70a24115a6a10f0721cfa56dad935369.jpg"} description={"AI/ML Engineer | TEDx"} updatredAt={"2h"} postDescription={"Lorem ipsum dolor sit amet consectetur adipisicing elitMaxime dignissimos iste repellendus! Sint nesciunt molestiaevel molestias doloribus consectetur vero, libero voluptatem.Voluptatem quia ipsum excepturi officia reprehenderit,corrupti velOdio molestias non aliquam corporis sunt voluptate pariatur quos libero itaque porro possimusquam modi aspernatur corrupti at, adipisci assumenda eius dolores velit! Eveniet voluptate eos cumque."} postImage={"https://i.pinimg.com/736x/f9/f5/fd/f9f5fd3e54d56a6a9b0a667bf78f059e.jpg"}/>
             <Post
     name={"Arjun Patel"}

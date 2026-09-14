@@ -13,8 +13,8 @@ interface PostProps {
 function Post (props: PostProps) {
     return (
         <>
-        <div className="rounded-2xl">
-        <div className="flex flex-col border-2 rounded-2xl mt-5 px-2 py-3 w-[750px]">
+        <div className="rounded-2xl justify-evenly gap-2">
+        <div className="flex flex-col border-2 rounded-2xl mt-5 px-2 py-3 max-w-[750px] w-full">
         <div className="flex place-content-between">
             <div className="flex flex-row">
                 <img src={props.profilePic} height={20} width={80} className="rounded-full"/>
