@@ -5,7 +5,7 @@ function MainScreen () {
     return (
 
         <>
-        <div className="flex flex-row justify-evenly mt-15">
+        <div className="flex flex-row justify-evenly mt-15 items-start">
         <LeftScreen/>
         <CenterScreen/>
         <RightScreen/>

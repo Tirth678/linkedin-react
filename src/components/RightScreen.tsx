@@ -4,7 +4,7 @@ import Puzzles from "./Puzzles";
 function RightScreen () {
     return (
         <>
-        <div className="border-2 p-5 rounded-2xl ">
+        <div className="border-2 p-5 rounded-2xl">
             <div>
                 <div className="flex flex-row p-2">
                     <p className="mr-29 font-bold text-2xl">Linkedin News</p>
