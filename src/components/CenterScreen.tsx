@@ -1,8 +1,12 @@
+import Feed from "./Feed";
+import Post from "./Post";
+
 function CenterScreen (){
     return (
         <>
         <div>
-            center screen
+            <Feed/>
+            <Post/>
         </div>
         </>
     )

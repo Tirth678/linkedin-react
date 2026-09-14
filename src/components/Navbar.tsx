@@ -1,6 +1,5 @@
 import IconDropDown from "./IconDropDown";
 import Icons from "./Icons";
-import { House } from 'lucide-react';
 function Navbar () {
     return (
     <>
