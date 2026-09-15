@@ -1,3 +1,18 @@
+import {  useState, useEffect } from 'react';
+import axios from 'axios';
+
+type Post = {
+    id: string
+    content: string
+    createdAt: string
+}
+
+const api = axios.create({
+    baseURL: "http://localhost:3000",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
 
 interface PostProps {
@@ -5,12 +20,48 @@ interface PostProps {
     profilePic: string
     description: string
     photo?: string // optional string ho na ho
-    updatredAt: string
+    updatedAt: string
     postDescription: string
     postImage: string
 }
 
 function Post (props: PostProps) {
+    const [posts, setPosts] = useState<Post[]>([]);
+    const [content, setContent] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const fetchPosts = async () => {
+        try {
+            const res = await api.get<Post[]>("/post");
+            setPosts(res.data);
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+        }
+    };
+
+    const createPost = async () => {
+        if (!content.trim()) return;
+
+        try {
+            setLoading(true);
+
+            await api.post("/post", { content });
+
+            setContent("");
+
+            // :-) Revalidate after POST
+            await fetchPosts();
+        } catch (error) {
+            console.error("Error creating post:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchPosts();
+    }, []);
+
     return (
         <>
         <div className="rounded-2xl justify-evenly gap-2">
@@ -22,7 +73,7 @@ function Post (props: PostProps) {
                 <p className="font-bold">{props.name}</p>
                 <p>{props.description}</p>
                 <div className="flex flex-row">
-                    <p className="">{props.updatredAt}</p>
+                    <p className="">{props.updatedAt}</p>
                     <p className="mx-1">•</p>
                     <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWdsb2JlIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMCIvPjxwYXRoIGQ9Ik0xMiAyYTE0LjUgMTQuNSAwIDAgMCAwIDIwIDE0LjUgMTQuNSAwIDAgMCAwLTIwIi8+PHBhdGggZD0iTTIgMTJoMjAiLz48L3N2Zz4=" height={15} width={15}/>
                 </div>
@@ -66,6 +117,34 @@ function Post (props: PostProps) {
         </div>
             </div>
         </div>
+        <div style={{ maxWidth: 500, margin: "auto" }}>
+      <h2>Create Post</h2>
+
+      <textarea
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="What's on your mind?"
+        style={{ width: "100%", height: 80 }}
+      />
+
+      <button onClick={createPost} disabled={loading}>
+        {loading ? "Posting..." : "Post"}
+      </button>
+
+      <hr />
+
+      <h2>Posts</h2>
+
+      {posts.map((post) => (
+        <div key={post.id} style={{ marginBottom: 16 }}>
+          <p>{post.content}</p>
+          <small>
+            {new Date(post.createdAt).toLocaleString()}
+          </small>
+          <hr />
+        </div>
+      ))}
+    </div>
         </>
     )
 }
